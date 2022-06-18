@@ -57,22 +57,23 @@ Dialog::Dialog(QWidget *parent)
     btn=new QPushButton;
     btn->setParent(this);
     btn->setStyleSheet("QPushButton{background-color: rgba(200,214,216,100);color:rgb(100,10,200);}");//设置按钮风格
-    btn->setText("正向计时器[&F]->");
+    btn->setText("正向计时器->");
     btn->move(720,360);
 
     //切换按钮2
     btn2=new QPushButton;
     btn2->setParent(this);
     btn2->setStyleSheet("QPushButton{background-color: rgba(200,214,216,100);color:rgb(100,10,200);}");//设置按钮风格
-    btn2->setText("倒计时器[&C]->");
+    btn2->setText("倒计时器->");
     btn2->move(720,400);
-    connect(btn,&QPushButton::clicked,this,[=](){
 
-    });
+    connect(ft->btn3,&QPushButton::clicked,this->btn,&QPushButton::clicked);//链接正计时的返回
+    connect(ct->btn4,&QPushButton::clicked,this->btn2,&QPushButton::clicked);//链接倒计时的返回
+
 
     //切换到正向计时器
     connect(btn,&QPushButton::clicked,this,[=](){
-        if(btn->text()=="正向计时器[&F]->"){
+        if(btn->text()=="正向计时器->"){
             clock1->hide();
             clock2->hide();
             ct->hide();
@@ -80,9 +81,10 @@ Dialog::Dialog(QWidget *parent)
             ft->bgm->setVolume(0.6);
             clock1->didastop();
             this->setPalette(palette2);
-            btn->setText("<-返回时钟[&F]");
+            btn->setText("<-返回时钟");
+            btn->hide();
             btn2->hide();
-            ft->grabKeyboard();
+            this->releaseKeyboard();
             bgm->setVolume(0);
         }
         else{
@@ -94,7 +96,8 @@ Dialog::Dialog(QWidget *parent)
             clock1->didaplay();
             ft->bgm->setVolume(0);
             this->setPalette(palette);
-            btn->setText("正向计时器[&F]->");
+            btn->setText("正向计时器->");
+            btn->show();
             this->grabKeyboard();
             btn2->show();
         }
@@ -102,7 +105,7 @@ Dialog::Dialog(QWidget *parent)
 
     //切换到倒计时器
     connect(btn2,&QPushButton::clicked,this,[=](){
-        if(btn2->text()=="倒计时器[&C]->"){
+        if(btn2->text()=="倒计时器->"){
             clock1->hide();
             clock2->hide();
             ft->hide();
@@ -110,8 +113,9 @@ Dialog::Dialog(QWidget *parent)
             ct->bgm->setVolume(0.6);
             clock1->didastop();
             this->setPalette(palette2);
-            btn2->setText("<-返回时钟[&C]");
-            ct->grabKeyboard();
+            btn2->setText("<-返回时钟");
+            btn2->hide();
+            this->releaseKeyboard();
             btn->hide();
             bgm->setVolume(0);
         }
@@ -125,7 +129,8 @@ Dialog::Dialog(QWidget *parent)
             ct->bgm->setVolume(0);
             this->setPalette(palette);
             this->grabKeyboard();
-            btn2->setText("倒计时器[&C]->");
+            btn2->setText("倒计时器->");
+            btn2->show();
             btn->show();
         }
     });
@@ -143,12 +148,5 @@ void Dialog::closeEvent(QCloseEvent *event){
    delete bgm;
    ct->close();
 }
-void Dialog::keyPressEvent(QKeyEvent *ev){
-    if(ev->key()==Qt::Key_F){
-        emit btn->clicked();
-    }
-    if(ev->key()==Qt::Key_C){
-        emit btn2->clicked();
-    }
-}
+
 

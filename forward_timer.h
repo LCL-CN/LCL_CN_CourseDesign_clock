@@ -20,12 +20,13 @@ public:
 
     }
     void keyPressEvent(QKeyEvent *ev);
-
+    QPushButton*btn3;
 
 
 signals:
 
 private:
+
     QPushButton  qpushButton;
     QPushButton  qpushButton_2;
     QTimer * timer;

@@ -7,7 +7,6 @@
 #include"forward_timer.h"
 #include"pointer_clock.h"
 #include"digital_clock.h"
-#include<QKeyEvent>
 #include<QPushButton>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -20,7 +19,7 @@ class Dialog : public QDialog
 public:
     Dialog(QWidget *parent = nullptr);
     void closeEvent(QCloseEvent*event);
-    void keyPressEvent(QKeyEvent *ev);
+
     ~Dialog();
 
 private:

@@ -6,6 +6,12 @@
 Forward_Timer::Forward_Timer(QWidget *parent)
     : QWidget{parent}
 {
+    btn3=new QPushButton;
+    btn3->setParent(this);
+    btn3->setStyleSheet("QPushButton{background-color: rgba(200,214,216,100);color:rgb(100,10,200);}");//设置按钮风格
+    btn3->setText("<-返回时钟[&F]");
+    btn3->move(720,360);
+
     bgm=new QSoundEffect;
     bgm->setParent(this);
     bgm->setSource(QUrl::fromLocalFile(":/c_bgm"));//设置资源文件
@@ -86,6 +92,9 @@ void Forward_Timer::keyPressEvent(QKeyEvent*ev){
     }
     if(ev->key()==Qt::Key_B){
         emit qpushButton_2.clicked();
+    }
+    if(ev->key()==Qt::Key_F){
+        emit btn3->clicked();
     }
 }
 

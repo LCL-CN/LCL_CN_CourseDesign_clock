@@ -8,6 +8,12 @@
 Countdown_Timer::Countdown_Timer(QWidget *parent)
     : QWidget{parent}
 {
+    btn4=new QPushButton;
+    btn4->setParent(this);
+    btn4->setStyleSheet("QPushButton{background-color: rgba(200,214,216,100);color:rgb(100,10,200);}");//设置按钮风格
+    btn4->setText("<-返回时钟[&C]");
+    btn4->move(720,400);
+
     bgm=new QSoundEffect;
     bgm->setParent(this);
     bgm->setSource(QUrl::fromLocalFile(":/c_bgm"));
@@ -23,7 +29,7 @@ Countdown_Timer::Countdown_Timer(QWidget *parent)
     lcdNumber->setDigitCount(11);
     lcdNumber->resize(400,100);
     lcdNumber->move(260,300);
-    lcdNumber->display(QDate::currentDate().toString("yyyy-MM-dd"));
+    lcdNumber->display("00:00:00:00");
 
     lcdNumber->setSegmentStyle(QLCDNumber::Filled);
 
@@ -63,6 +69,12 @@ void Countdown_Timer:: keyPressEvent(QKeyEvent *ev){
         emit btnReset->clicked();
 
     }
+    if(ev->key()==Qt::Key_C)
+    {
+        if(ev->isAutoRepeat()) return;
+        emit btn4->clicked();
+
+    }
 
 }
 
@@ -72,7 +84,7 @@ void Countdown_Timer::timeoutRun()//pausef判断是否该倒计时
         //定时
         for(hour = mhour;hour>=0;hour--)
             for( min =mmin;min>=0 ;min--)
-                for(sec=msec;sec>=0;sec--)
+                for(sec=msec-1;sec>=0;sec--)
 
                     for(mms=99;mms>=0;mms--)
                     {
@@ -137,6 +149,7 @@ void Countdown_Timer::on_pushButton_clicked()//开始
         bgm->stop();
     }
 }
+
 void Countdown_Timer::on_btnReset_clicked()//重置
 {
     pausef=0;
@@ -145,10 +158,16 @@ void Countdown_Timer::on_btnReset_clicked()//重置
 
     pushButton->setText("开始[&A]");
     bgm->stop();
-    lcdNumber->display(QDateTime::currentDateTime().toString("00:00:00:00"));
+
     mhour=timeEdit->time().hour();
     msec=timeEdit->time().second();
     mmin=timeEdit->time().minute();
+
+
+    lcdNumber->display(QDateTime::currentDateTime().toString(
+                               QString("%1").arg(mhour, 2, 10, QChar('0'))+":"+
+                               QString("%1").arg(mmin, 2, 10, QChar('0'))+":"+
+                               QString("%1").arg(msec, 2, 10, QChar('0')))+":"+"00");
 
 }
 

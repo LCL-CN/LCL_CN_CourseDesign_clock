@@ -20,7 +20,7 @@ public:
             pausef=!pausef;
     }
     explicit Countdown_Timer(QWidget *parent = nullptr);
-
+    QPushButton *btn4;
     void keyPressEvent(QKeyEvent *ev);
 signals:
 private:
