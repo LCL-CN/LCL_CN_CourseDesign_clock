@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="s1">source/OIP-C (1).jpg</file>
+        <file alias="s2">source/OIP-C (2).jpg</file>
+        <file alias="s3">source/R-C.jpg</file>
+        <file alias="s4">source/true.jpg</file>
+        <file alias="s5">source/64d18680daeb441183cc6851da2de9a5.png</file>
+        <file alias="s6">source/d8a22b98c48f43a5ac2533d9b63de2d4.png</file>
+        <file alias="s7">source/VCG211258128220.jpg</file>
+        <file alias="s8">source/VCG211292959559.jpg</file>
+        <file alias="s9">source/VCG211298462067.jpg</file>
+        <file alias="y1">source/63d5451d033e5042af813a455708671a6402ed5e.jpg@1813w.jpg</file>
+        <file alias="y2">source/b234d6766fc69998b5f4abd89564903fe15fbd8b.jpg@1813w.jpg</file>
+        <file alias="y3">source/d3dd2eca500318bd457e438c771b68a800400afd.jpg@1813w.jpg</file>
+        <file alias="y4">source/d096fe6dd51490494ed86585245480ca38b0da06.jpg@1813w.jpg</file>
+        <file alias="y5">source/f6864f5e5418e48ee849aa13a19bb468f6bd2ef5.jpg@1813w.jpg</file>
+        <file alias="y6">source/thumbbig-1161811.jpg</file>
+        <file alias="y7">source/v2-926c353eaf547843ada755ee96cdf869_r.jpg</file>
+        <file alias="bgm1">source/Backgroung_Music.wav</file>
+        <file alias="dida">source/dida.wav</file>
+        <file alias="c_bgm">source/countdown_bgm.wav</file>
+        <file alias="jieshu">source/y895.wav</file>
+    </qresource>
+</RCC>
