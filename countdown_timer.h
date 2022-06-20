@@ -33,6 +33,8 @@ private:
     void timeoutRun(void);
     int hour=12,min=0,sec=0;
     int mms,mhour=11,mmin=59,msec=59;
+    int a=0;
+    int cmms;
 
     void Delay_MSec(unsigned int msec);//延迟计时
 

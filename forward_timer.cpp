@@ -33,7 +33,7 @@ Forward_Timer::Forward_Timer(QWidget *parent)
     lcdNumber->resize(400,100);
     lcdNumber->move(260,200);
     lcdNumber->setDigitCount(11);
-
+    lcdNumber->setStyleSheet("QLCDNumber{background-color: rgba(20,214,216,60);}");
     timer=new QTimer(this);
 
 
@@ -63,7 +63,7 @@ Forward_Timer::Forward_Timer(QWidget *parent)
 
         num++;
         hour=(num/360000);
-        min=(num/60000)%60;
+        min=(num/6000)%60;
         sec=(num/100)%60;
         lcdNumber->display(
                     "0"+QString::number(hour)+":"

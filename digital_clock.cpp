@@ -20,6 +20,7 @@ Digital_Clock::Digital_Clock(QWidget *parent)
     lcd->move(350,160);
     lcd->setDigitCount(11);
     lcd->resize(200,50);
+    lcd->setStyleSheet("QLCDNumber{background-color: rgba(0, 160, 160, 200);}");
     showtime();
 }
 

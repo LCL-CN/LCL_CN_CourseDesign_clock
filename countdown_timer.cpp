@@ -32,23 +32,27 @@ Countdown_Timer::Countdown_Timer(QWidget *parent)
     lcdNumber->display("00:00:00:00");
 
     lcdNumber->setSegmentStyle(QLCDNumber::Filled);
+    lcdNumber->setStyleSheet("QLCDNumber{background-color:rgba(50, 200, 100, 200);}");
 
     timer = new QTimer(this);
 
     pushButton=new QPushButton(this);
-    pushButton->move(415,250);
+    pushButton->move(560,115);
+    pushButton->resize(100,30);
     pushButton->setText("开始");
     pushButton->hide();
     pushButton->setStyleSheet("QPushButton{background-color: rgba(200,214,216,100);color:rgb(100,10,200);}");
     btnReset=new QPushButton(this);
-    btnReset->move(415,100);
+    btnReset->move(415,115);
+    btnReset->resize(100,30);
     btnReset->setText("重置[&B]");
     btnReset->setStyleSheet("QPushButton{background-color: rgba(200,214,216,100);color:rgb(100,10,200);}");
     timeEdit=new QTimeEdit(this);
-    timeEdit->move(400,200);
+    timeEdit->move(260,115);
     timeEdit->setFixedSize(100,30);
     timeEdit->setDisplayFormat("hh:mm:ss");
     on_btnReset_clicked();
+
     connect(timer,&QTimer::timeout,this,&Countdown_Timer::timeoutRun);//信号槽当按时间结束后运行自定义槽信号
     connect(pushButton,&QPushButton::clicked,this,&Countdown_Timer::on_pushButton_clicked);
     connect(btnReset,&QPushButton::clicked,this,&Countdown_Timer::on_btnReset_clicked);
@@ -84,33 +88,91 @@ void Countdown_Timer::timeoutRun()//pausef判断是否该倒计时
         //定时
         for(hour = mhour;hour>=0;hour--)
             for( min =mmin;min>=0 ;min--)
-                for(sec=msec-1;sec>=0;sec--)
+                for(sec =msec;sec>=0;sec--){
+//                if(cmms>0){
+//                    for(cmms;mms>=0;mms--)
+//                    {
 
-                    for(mms=99;mms>=0;mms--)
-                    {
+//                        lcdNumber->display(QDateTime::currentDateTime().toString(
+//                                                   QString("%1").arg(hour, 2, 10, QChar('0'))+":"+
+//                                                   QString("%1").arg(min, 2, 10, QChar('0'))+":"+
+//                                                   QString("%1").arg(sec, 2, 10, QChar('0')))+":"+
+//                                                   QString("%1").arg(mms, 2, 10, QChar('0')));
+//                        Delay_MSec(10);//延时毫秒,而不是用start函数来计时
 
-                        lcdNumber->display(QDateTime::currentDateTime().toString(
-                                                   QString("%1").arg(hour, 2, 10, QChar('0'))+":"+
-                                                   QString("%1").arg(min, 2, 10, QChar('0'))+":"+
-                                                   QString("%1").arg(sec, 2, 10, QChar('0')))+":"+
-                                                   QString("%1").arg(mms, 2, 10, QChar('0')));
-                        Delay_MSec(10);//延时毫秒,而不是用start函数来计时
+//                    }
+//                    if(sec>0){
+//                        sec--;
+//                    }
+//                    else{
+//                        break;
+//                    }
+//                    cmms=0;
+//                }
+//                    for(mms=99;mms>=0;mms--)
+//                    {
 
-                        if(min>0 && sec==0)
-                            msec=59;
-                        if(hour>0 && min==0)
-                            mmin=59;
-                        if(!pausef )//未开始时
-                        {
-                            if(!resetf) //被重置后不记录当前时间位置
-                            {
-                                mhour=hour;
-                                mmin=min;
-                                msec=sec;
-                            }
-                            return;
-                        }
-                    }
+//                        lcdNumber->display(QDateTime::currentDateTime().toString(
+//                                                   QString("%1").arg(hour, 2, 10, QChar('0'))+":"+
+//                                                   QString("%1").arg(min, 2, 10, QChar('0'))+":"+
+//                                                   QString("%1").arg(sec, 2, 10, QChar('0')))+":"+
+//                                                   QString("%1").arg(mms, 2, 10, QChar('0')));
+//                        Delay_MSec(10);//延时毫秒,而不是用start函数来计时
+
+//                        if(min>0 && sec==0)
+//                            msec=59;
+//                        if(hour>0 && min==0)
+//                            mmin=59;
+//                        if(!pausef )//未开始时
+//                        {
+//                            if(!resetf) //被重置后不记录当前时间位置
+//                            {
+//                                mhour=hour;
+//                                mmin=min;
+//                                msec=sec;
+//                                cmms=mms;
+//                            }
+//                            return;
+//                        }
+//                    }
+
+
+                    if(a==0)
+                                       {
+                                           mms=99;
+                                           if(hour==0&min==0&sec==0)
+                                               mms=0;
+                                       }
+                                       else
+                                           mms=cmms;
+                                       for(mms;mms>=0;mms--)
+                                       {
+                                           a=0;
+
+                                           lcdNumber->display(QDateTime::currentDateTime().toString(
+                                                                  QString("%1").arg(hour, 2, 10, QChar('0'))+":"+
+                                                                  QString("%1").arg(min, 2, 10, QChar('0'))+":"+
+                                                                  QString("%1").arg(sec, 2, 10, QChar('0')))+":"+
+                                                              QString("%1").arg(mms, 2, 10, QChar('0')));
+                                           Delay_MSec(10);//延时毫秒,而不是用start函数来计时
+                                           cmms=mms;
+
+                                           if(min>0 && sec==0)
+                                               msec=59;
+                                           if(hour>0 && min==0)
+                                               mmin=59;
+                                           if(!pausef )//未开始时
+                                           {
+                                               if(!resetf) //被重置后不记录当前时间位置
+                                               {
+                                                   mhour=hour;
+                                                   mmin=min;
+                                                   msec=sec;
+                                               }
+                                               return;
+                                           }
+                                       }
+                }
 
         timer->stop();//让time start只进行一次，只作为一个信号传递 不作为时间的叠加
         bgm->stop();//标志着倒计时结束。
@@ -144,6 +206,7 @@ void Countdown_Timer::on_pushButton_clicked()//开始
     }
     else
     {
+        a=1;
         pushButton->setText("开始[&A]");
         timer->stop();//暂停
         bgm->stop();
@@ -152,6 +215,7 @@ void Countdown_Timer::on_pushButton_clicked()//开始
 
 void Countdown_Timer::on_btnReset_clicked()//重置
 {
+    a=0;
     pausef=0;
     resetf=1; //重置标志，不会使时分秒更新
     timer->stop();
@@ -168,6 +232,23 @@ void Countdown_Timer::on_btnReset_clicked()//重置
                                QString("%1").arg(mhour, 2, 10, QChar('0'))+":"+
                                QString("%1").arg(mmin, 2, 10, QChar('0'))+":"+
                                QString("%1").arg(msec, 2, 10, QChar('0')))+":"+"00");
+
+        if(msec>0){
+            msec--;
+        }
+        else if(mmin>0){
+            mmin--;
+            msec=59;
+        }
+        else if(mhour>0){
+            mhour--;
+            mmin=59;
+            msec=59;
+        }
+
+
+        cmms=0;
+
 
 }
 
